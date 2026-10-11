@@ -523,32 +523,6 @@ footer{padding:20px clamp(16px,4vw,56px) 48px;font-size:.9rem;color:var(--foot)}
       <h2>portfolio.</h2>
       <div class="stream" id="projets">
         <!-- Pour ajouter un projet : dupliquer un bloc <article class="entry"> et changer data-tag, le tag, le titre, la phrase et l'image -->
-        <article class="entry" data-tag="maquette">
-          <div class="folder f-teal cap" data-tab="Projet 1"><h3>Titre de la maquette</h3><p>Courte phrase : ce que montre cette image et pourquoi elle compte.</p></div>
-          <figure class="folder f-sand shot" data-tab="Étude"><div class="img mcar" aria-roledescription="carrousel" aria-label="Carrousel d’images">
-            <!-- Remplacer le texte de chaque zone par : <img src="maquette-1.jpg" alt="Description"> -->
-            <div class="mslide on" style="--a:#2FA3BA;--b:#074F57">Maquette 1</div>
-            <div class="mslide" style="--a:#FFD2A8;--b:#F7A266">Maquette 2</div>
-            <div class="mslide" style="--a:#CDEBC3;--b:#74A57F">Maquette 3</div>
-            <div class="mslide" style="--a:#1B8A9A;--b:#0C1415">Maquette 4</div>
-            <div class="mslide" style="--a:#FBC48F;--b:#9ECE9A">Maquette 5</div>
-            <div class="dots mdots"></div>
-          </div></figure>
-          <span class="badge t-maquette">Maquette</span>
-        </article>
-
-        <article class="entry" data-tag="recherche">
-          <div class="folder f-cer cap" data-tab="Projet 2"><h3>Titre de la recherche</h3><p>Courte phrase : le terrain observé et ce qu’il a appris.</p></div>
-          <figure class="folder f-cel shot" data-tab="Étude"><div class="img mcar" aria-roledescription="carrousel" aria-label="Carrousel d’images">
-            <!-- Remplacer le texte de chaque zone par : <img src="recherche-1.jpg" alt="Description"> ; ajouter ou retirer des zones à volonté -->
-            <div class="mslide on" style="--a:#FFD2A8;--b:#F7A266">Votre image 1</div>
-            <div class="mslide" style="--a:#2FA3BA;--b:#074F57">Votre image 2</div>
-            <div class="mslide" style="--a:#CDEBC3;--b:#74A57F">Votre image 3</div>
-            <div class="dots mdots"></div>
-          </div></figure>
-          <span class="badge t-recherche">Recherche</span>
-        </article>
-
         <article class="entry" data-tag="ideation">
           <div class="folder f-mute cap" data-tab="Travail du bois"><h3>Table modulable</h3><p>Réalisation d’une table modulable en bois passant de table à manger à table basse, spécialement pensée pour optimiser l’espace limité d’un appartement étudiant.</p></div>
           <figure class="folder f-teal shot" data-tab="Réalisation"><div class="img mcar" aria-roledescription="carrousel" aria-label="Carrousel d’images">
@@ -565,7 +539,7 @@ footer{padding:20px clamp(16px,4vw,56px) 48px;font-size:.9rem;color:var(--foot)}
         </article>
 
         <article class="entry" data-tag="3d">
-          <div class="folder f-cel cap" data-tab="Projet 4"><h3>Table modulable</h3><p>Modélisation 3D sur Blender pour valider les proportions et le mécanisme de pliage de la table avant sa réalisation.</p></div>
+          <div class="folder f-cel cap" data-tab="Projet 2"><h3>Table modulable</h3><p>Modélisation 3D sur Blender pour valider les proportions et le mécanisme de pliage de la table avant sa réalisation.</p></div>
           <figure class="folder f-cer shot" data-tab="Vitrine 3D">
             <!-- Vitrine 3D interactive : TableModulable.glb (intégré en fin de fichier, variable window.VITRINE). Glisser pour faire pivoter.
                  Le cube reste affiché si Three.js ne peut pas se charger. -->
@@ -576,6 +550,32 @@ footer{padding:20px clamp(16px,4vw,56px) 48px;font-size:.9rem;color:var(--foot)}
             </div>
           </figure>
           <span class="badge t-3d">3D</span>
+        </article>
+
+        <article class="entry" data-tag="maquette">
+          <div class="folder f-teal cap" data-tab="Projet 3"><h3>Titre de la maquette</h3><p>Courte phrase : ce que montre cette image et pourquoi elle compte.</p></div>
+          <figure class="folder f-sand shot" data-tab="Étude"><div class="img mcar" aria-roledescription="carrousel" aria-label="Carrousel d’images">
+            <!-- Remplacer le texte de chaque zone par : <img src="maquette-1.jpg" alt="Description"> -->
+            <div class="mslide on" style="--a:#2FA3BA;--b:#074F57">Maquette 1</div>
+            <div class="mslide" style="--a:#FFD2A8;--b:#F7A266">Maquette 2</div>
+            <div class="mslide" style="--a:#CDEBC3;--b:#74A57F">Maquette 3</div>
+            <div class="mslide" style="--a:#1B8A9A;--b:#0C1415">Maquette 4</div>
+            <div class="mslide" style="--a:#FBC48F;--b:#9ECE9A">Maquette 5</div>
+            <div class="dots mdots"></div>
+          </div></figure>
+          <span class="badge t-maquette">Maquette</span>
+        </article>
+
+        <article class="entry" data-tag="recherche">
+          <div class="folder f-cer cap" data-tab="Projet 4"><h3>Titre de la recherche</h3><p>Courte phrase : le terrain observé et ce qu’il a appris.</p></div>
+          <figure class="folder f-cel shot" data-tab="Étude"><div class="img mcar" aria-roledescription="carrousel" aria-label="Carrousel d’images">
+            <!-- Remplacer le texte de chaque zone par : <img src="recherche-1.jpg" alt="Description"> ; ajouter ou retirer des zones à volonté -->
+            <div class="mslide on" style="--a:#FFD2A8;--b:#F7A266">Votre image 1</div>
+            <div class="mslide" style="--a:#2FA3BA;--b:#074F57">Votre image 2</div>
+            <div class="mslide" style="--a:#CDEBC3;--b:#74A57F">Votre image 3</div>
+            <div class="dots mdots"></div>
+          </div></figure>
+          <span class="badge t-recherche">Recherche</span>
         </article>
 
         <article class="entry" data-tag="sketchs">
