@@ -1401,14 +1401,18 @@ dialog.cv-lb .lb-btn svg{width:22px;height:22px;fill:none;stroke:currentColor;st
 /* À propos : à gauche le grand dossier CV avec le dossier Stage en dessous, à droite Manifeste puis Parcours */
 #apropos .about-main{display:flex;flex-direction:column;gap:48px;min-width:0}
 #apropos .about-main>.folder.cv-card{display:flex!important;flex-direction:row;align-items:center;gap:clamp(20px,3vw,40px);padding:clamp(24px,3vw,40px);flex:1 1 auto}
-#apropos .about-main>.folder.cv-card .cv-thumb{width:clamp(200px,24vw,340px)}
+#apropos .about-main>.folder.cv-card .cv-thumb{width:clamp(150px,14vw,210px)}
 #apropos .about-main>.folder.cv-card .cv-txt h3{font-size:clamp(1.6rem,2.4vw,2.2rem)}
 #apropos .about-main>.folder.cv-card .cv-txt p{font-size:1.02rem;max-width:32ch}
 #apropos .about-main>.folder[data-tab="Stage"]{flex:none!important}
-#apropos .about-side>.folder[data-tab="Parcours"]{flex:1 1 auto}
 #apropos .about{align-items:stretch}
 #apropos .about-side>.folder[data-tab="Manifeste"] .manifest-text{max-height:12.8em}
 #apropos .about-side>.folder[data-tab="Manifeste"] .manifest-text p{font-size:.93rem}
+@media (min-width:1001px){
+  /* le dossier CV prend exactement la hauteur laissée par la colonne de droite : plus de vide sous Parcours */
+  #apropos .about-main>.folder.cv-card{container-type:size;min-height:300px}
+  #apropos .about-main>.folder.cv-card .cv-thumb{width:min(46%,calc(100cqh * 1489 / 2106));height:auto;max-width:none}
+}
 @media (max-width:700px){#apropos .about-main>.folder.cv-card{flex-direction:column;align-items:flex-start}#apropos .about-main>.folder.cv-card .cv-thumb{width:min(100%,260px)}}
 @media print{#apropos .about-side>.folder[data-tab="Manifeste"] .manifest-text{max-height:none!important}}
 </style>
