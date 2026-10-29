@@ -695,15 +695,15 @@ p,.lead,dd{text-align:justify;text-align-last:left;hyphens:auto;-webkit-hyphens:
         <div class="classeur" id="classeur">
           <div class="cl-tilt">
             <a href="#portfolio" class="folder f-cel fd tx0" data-tab="Matière" data-d="0" style="--tx:0px">
-              <div class="vis v-photo" id="matiereVis"><img src="img/cl-matiere.jpg" alt="Table retournée : assemblage des pieds et des traverses en bois" decoding="async"></div>
+              <div class="vis v-photo" id="matiereVis"><img alt="" decoding="async"></div>
               <div class="cl-txt"><h3>Expérimentation matière</h3><p>Du bois au PMMA, en passant par différents types de mousse, le prototypage s’explore à travers une grande variété de matières. Explorons-les !</p></div>
             </a>
             <a href="#portfolio" class="folder f-deep fd t2" data-tab="En chiffres" data-d="1" style="--tx:34%">
-              <div class="vis cl-mix" aria-hidden="true"><img src="img/cl-mix1.jpg" alt="" decoding="async"><img src="img/cl-mix2.jpg" alt="" decoding="async"><img src="img/cl-mix3.jpg" alt="" decoding="async"><img src="img/cl-mix4.jpg" alt="" decoding="async"><img src="img/cl-mix5.jpg" alt="" decoding="async"></div>
+              <div class="vis cl-mix" aria-hidden="true"><img alt="" decoding="async"><img alt="" decoding="async"><img alt="" decoding="async"><img alt="" decoding="async"><img alt="" decoding="async"></div>
               <div class="cl-txt"><h3>3 ans d’études, des années d’itérations</h3><p>Du carton plume au bois, en passant par la mousse polyuréthane, la découpe laser et l’impression 3D, chaque matériau m’offre un intérêt particulier à travailler.</p></div>
             </a>
             <a href="#etude-silence" class="folder f-sand fd t3" data-tab="Projet phare" data-d="2" style="--tx:68%">
-              <div class="vis v-photo" id="phareVis"><img src="img/cl-phare.jpg" alt="Vue plongeante sur l’écran et le liseré lumineux de l’objet" decoding="async"></div>
+              <div class="vis v-photo" id="phareVis"><img alt="" decoding="async"></div>
               <div class="cl-txt"><h3>Le projet du moment</h3><p>Implémenter un réseau social simple et émotionnel chez nos aînés pour lutter contre les phénomènes d’isolements sociaux chez les personnes âgées. Travaillons sur le silence en combattant l’isolement social chez nos aînés.</p></div>
             </a>
           </div>
@@ -1863,4 +1863,15 @@ document.addEventListener('keydown',e=>{if(d.open&&['ArrowDown','ArrowUp','PageD
 </script>
 
 
+<script>(function(){var s=document.querySelectorAll('#projets .entry[data-tag="ideation"] .mslide img')[3],d=document.querySelector('#matiereVis img');if(s&&d){d.src=s.src;d.alt=s.alt}})()</script>
+<script>(function(){var s=document.querySelectorAll('#projets .entry[data-tag="recherche"] .mslide img')[3],d=document.querySelector('#phareVis img');if(s&&d){d.src=s.src;d.alt=s.alt}})()</script>
+<script id="classeur-mix-js">
+(function(){
+  /* mosaïque du dossier « En chiffres » : reprend des photos des projets du portfolio */
+  var alts=['Table modulable en position haute','L’objet allumé sur une commode','Maquette éclairée vue de l’intérieur','Maquette du module : le signal lumineux allumé','Croquis couleur de l’espace de présentation Oakley, avec'];
+  var box=document.querySelector('#classeur .cl-mix');if(!box)return;
+  var dst=box.querySelectorAll('img'),src=document.querySelectorAll('#portfolio img[alt]');
+  alts.forEach(function(a,k){for(var i=0;i<src.length;i++){if(src[i].getAttribute('alt').indexOf(a)===0&&dst[k]){dst[k].src=src[i].getAttribute('src');break}}});
+})();
+</script>
 </body></html>
