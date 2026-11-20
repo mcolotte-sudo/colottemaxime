@@ -1005,8 +1005,7 @@ function fitTabs(){
       const fs=parseFloat(a.fontSize)*Math.max(.55,(max-pl-38)/tw);
       el.style.setProperty('--tabfs',fs.toFixed(2)+'px');
     }
-    const n2=el.classList.contains('shot3d')?Math.max(80,need-18):Math.max(110,need);   /* onglet Modèle 3D : bout raccourci */
-    el.style.setProperty('--tabw','min('+n2+'px,calc(100% - 6px))');
+    el.style.setProperty('--tabw','min('+Math.max(110,need)+'px,calc(100% - 6px))');
   });
   m.remove();
 }
@@ -3710,7 +3709,7 @@ new MutationObserver(chk).observe(pv,{subtree:true,childList:true,characterData:
   var en=document.querySelector('#projets .entry.stack3d');if(!en)return;
   var ph=en.querySelector('.shot.tphoto'),s3=en.querySelector('.shot3d');if(!ph||!s3)return;
   /* l'onglet 3D se place juste à droite de l'onglet photo, et le dossier 3D prend la taille du dossier photo */
-  function sync(){var w=parseFloat(getComputedStyle(ph,'::before').width)||150;s3.style.setProperty('--tx',Math.round(w+22)+'px');
+  function sync(){var w=parseFloat(getComputedStyle(ph,'::before').width)||150;s3.style.setProperty('--tx',Math.round(w+6)+'px');
     s3.style.height=ph.offsetHeight+'px';if(window.redrawTabs)window.redrawTabs()}
   sync();addEventListener('load',sync);addEventListener('resize',sync);setTimeout(sync,800);setTimeout(sync,2500);
   if(document.fonts&&document.fonts.ready)document.fonts.ready.then(sync);
