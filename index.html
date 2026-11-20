@@ -1065,6 +1065,7 @@ function applyLang(l){
     TR_ATTRS.forEach(a=>{
       if(!el.hasAttribute(a))return;
       if(!(a in o))o[a]=el.getAttribute(a);
+      if(a==='alt'&&!el.hasAttribute('data-alt-fr'))el.setAttribute('data-alt-fr',o[a]);   /* texte français gardé : sert à retrouver les photos copiées */
       el.setAttribute(a,(l!=='fr'&&DK[l][norm(o[a])])||o[a]);
     });
   });
@@ -1979,12 +1980,12 @@ window.addEventListener('wheel',shut,{passive:true});window.addEventListener('to
   var alts=['Table modulable en position haute','L’objet allumé sur une commode','Maquette éclairée vue de l’intérieur','Maquette du module : le signal lumineux allumé','Croquis couleur de l’espace de présentation Oakley, avec'];
   var box=document.querySelector('#classeur .cl-mix');if(!box)return;
   var dst=box.querySelectorAll('img'),src=document.querySelectorAll('#portfolio img[alt]');
-  alts.forEach(function(a,k){for(var i=0;i<src.length;i++){if(src[i].getAttribute('alt').indexOf(a)===0&&dst[k]){dst[k].src=src[i].getAttribute('src');break}}});
+  alts.forEach(function(a,k){for(var i=0;i<src.length;i++){if((src[i].getAttribute('data-alt-fr')||src[i].getAttribute('alt')).indexOf(a)===0&&dst[k]){dst[k].src=src[i].getAttribute('src');break}}});
 })();
 </script>
 <script id="copie-images-js">
 /* les diapositives de l'accueil reprennent les photos des projets (une seule copie de chaque image dans la page) */
-document.querySelectorAll('img[data-copy]').forEach(function(d){var k=d.getAttribute('data-copy');var s=[].find.call(document.querySelectorAll('#portfolio img[src^="data:"]'),function(i){return (i.getAttribute('alt')||'').indexOf(k)===0});if(s)d.src=s.getAttribute('src')});
+document.querySelectorAll('img[data-copy]').forEach(function(d){var k=d.getAttribute('data-copy');var s=[].find.call(document.querySelectorAll('#portfolio img[src^="data:"]'),function(i){return (i.getAttribute('data-alt-fr')||i.getAttribute('alt')||'').indexOf(k)===0});if(s)d.src=s.getAttribute('src')});
 </script>
 <script id="profil-clic-js">
 /* tout le dossier Profil de l'accueil renvoie à À propos (les boutons mail et LinkedIn gardent leur lien) */
