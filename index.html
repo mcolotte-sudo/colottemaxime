@@ -3693,7 +3693,10 @@ new MutationObserver(chk).observe(pv,{subtree:true,childList:true,characterData:
 #projets .entry.stack3d .cap .cap3d,#projets .entry.stack3d.v3d .cap p:not(.cap3d){display:none}
 #projets .entry.stack3d.v3d .cap .cap3d{display:block}
 /* en mode 3D, rien ne bouge au survol (on fait tourner la table) */
-#projets .entry.stack3d.v3d:hover .shot,#projets .entry.stack3d .shot3d{translate:none!important;filter:none!important}
+#projets .entry.stack3d .shot3d{translate:none}
+#projets .entry.stack3d:hover .shot:not(:hover){translate:none!important;--o:6px}   /* seul le dossier survolé se soulève */
+/* survol d'un onglet (devant ou derrière) : le dossier se soulève, comme « Travail du bois » */
+#projets .entry.stack3d .shot3d:hover,#projets .entry.stack3d.v3d .shot.tphoto:hover{translate:-6px -6px!important;--o:9px}
 </style>
 <script id="onglet-3d-js">
 (function(){
