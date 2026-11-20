@@ -2772,11 +2772,11 @@ section{scroll-margin-top:84px}
   entries.forEach(function(en){
     en.addEventListener('click',function(e){if(cur||en.querySelector('.shot:not(.shot3d) .stage'))return;var t=e.target;if(t.closest('.shot3d')||(en.classList.contains('v3d')&&t.closest('.shot')))return;
       if(t.closest('video,.c3d,button,a,.mdots,.pill3d'))return;var m=t.closest('.mcar');if(m&&m._moved)return;
-      if(!t.closest('.cap,.shot'))return;if(t.closest('.shot')&&en.querySelector('.shot:not(.shot3d) .stage,.shot .vbox'))return;e.preventDefault();e.stopPropagation();
+      if(!t.closest('.shot'))return;if(t.closest('.shot')&&en.querySelector('.shot:not(.shot3d) .stage,.shot .vbox'))return;e.preventDefault();e.stopPropagation();
       var car=en.querySelector('.mcar'),s=car&&car._slide?car._slide():null;open(en,s)},true);
-    en.addEventListener('keydown',function(e){if(cur||en.querySelector('.shot:not(.shot3d) .stage')||(e.key!=='Enter'&&e.key!==' '))return;if(!e.target.closest('.shot .img,.cap'))return;if(e.target.closest('.stage,video'))return;
+    en.addEventListener('keydown',function(e){if(cur||en.querySelector('.shot:not(.shot3d) .stage')||(e.key!=='Enter'&&e.key!==' '))return;if(!e.target.closest('.shot .img'))return;if(e.target.closest('.stage,video'))return;
       e.preventDefault();e.stopPropagation();var car=en.querySelector('.mcar');open(en,car&&car._slide?car._slide():null)},true);
-    var cp=en.querySelector('.cap');if(cp&&!en.querySelector('.shot:not(.shot3d) .stage')&&!cp.hasAttribute('tabindex')){cp.tabIndex=0;cp.setAttribute('role','button')}
+    var cp=en.querySelector('.cap');if(false&&cp&&!cp.hasAttribute('tabindex')){cp.tabIndex=0;cp.setAttribute('role','button')}
   });
 })();
 </script>
@@ -2799,7 +2799,7 @@ section{scroll-margin-top:84px}
   if(ph&&!red){if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){if(es[0].isIntersecting){ph.classList.add('spin');io.disconnect()}},{threshold:.4});io.observe(ph)}else ph.classList.add('spin')}
   if(red||!matchMedia('(pointer:fine)').matches)return;
   document.querySelectorAll('.folder').forEach(function(f){
-    if(f.closest('dialog,#pov,.menu,.lb-panel,#topbar,#classeur'))return;if(f.matches('#projets .entry .shot')&&f.querySelector('.stage,.vbox'))return;if(f.matches('#projets .entry .cap')&&f.parentNode.querySelector('.shot:not(.shot3d) .stage'))return;f.classList.add('tilt');var raf=0;
+    if(f.closest('dialog,#pov,.menu,.lb-panel,#topbar,#classeur'))return;if(f.matches('#projets .entry .shot')&&f.querySelector('.stage,.vbox'))return;if(f.matches('#projets .entry .cap'))return;f.classList.add('tilt');var raf=0;
     f.addEventListener('pointermove',function(e){var r=f.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5,k=Math.max(2.5,Math.min(7,1400/Math.max(r.width,r.height)));
       cancelAnimationFrame(raf);raf=requestAnimationFrame(function(){f.classList.add('tilting');
         f.style.transform='perspective(1100px) rotateX('+(-y*k).toFixed(2)+'deg) rotateY('+(x*k).toFixed(2)+'deg) translate(-5px,-5px)'})});
@@ -3718,5 +3718,16 @@ new MutationObserver(chk).observe(pv,{subtree:true,childList:true,characterData:
   front(false);
 })();
 </script>
+
+<style id="cap-fixe-css">
+/* Dossiers de texte des projets : plus cliquables, ils ne bougent plus au survol */
+#projets .entry .cap,#projets .entry .cap *{cursor:default!important}
+#projets .entry .cap,#projets .entry:hover .cap,#projets .entry .cap:hover{translate:none!important;filter:none!important;--sh:var(--sh0,8px 8px 0 var(--hard))}
+/* la flèche orange passe dans l'onglet (coin supérieur gauche), en plus gros et toujours visible */
+#projets .entry .cap h3::after,#projets .entry:hover .cap h3::after,#projets .entry .cap:hover h3::after{content:"\2192"!important;display:block!important;position:absolute;left:22px;top:-31px;margin:0;
+  font-size:1.9rem;line-height:1;font-weight:700;color:var(--signal,#E5533D);opacity:1!important;transform:none;pointer-events:none;z-index:2}
+#projets .entry:hover .cap h3::after{animation:capNudge 1.1s ease-in-out .2s infinite}
+@media (prefers-reduced-motion:reduce){#projets .entry:hover .cap h3::after{animation:none}}
+</style>
 </body>
 </html>
