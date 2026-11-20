@@ -1005,7 +1005,8 @@ function fitTabs(){
       const fs=parseFloat(a.fontSize)*Math.max(.55,(max-pl-38)/tw);
       el.style.setProperty('--tabfs',fs.toFixed(2)+'px');
     }
-    el.style.setProperty('--tabw','min('+Math.max(110,need)+'px,calc(100% - 6px))');
+    const n2=el.classList.contains('shot3d')?Math.max(80,need-18):Math.max(110,need);   /* onglet Modèle 3D : bout raccourci */
+    el.style.setProperty('--tabw','min('+n2+'px,calc(100% - 6px))');
   });
   m.remove();
 }
