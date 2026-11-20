@@ -15,6 +15,46 @@
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;600;700;800&family=Archivo:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
 </head>
 <body>
+<!-- ===== Animation d'arrivée : visible dès les premiers octets, retirée dès que la page est prête (ne la retarde pas) ===== -->
+<style id="intro-css">
+#intro{position:fixed;inset:0;z-index:2147483000;display:grid;place-items:center;pointer-events:none;
+  background-color:#F1F0EC;background-image:linear-gradient(rgba(18,19,21,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(18,19,21,.07) 1px,transparent 1px);background-size:70px 70px;
+  transition:transform .6s cubic-bezier(.7,0,.2,1),opacity .6s;animation:introSecours 0s 9s forwards}
+#intro .in-box{display:flex;flex-direction:column;align-items:center;gap:22px;transition:transform .6s cubic-bezier(.7,0,.2,1),opacity .35s}
+#intro .in-logo{width:96px;height:96px;border-radius:22px;background:#fff;display:grid;place-items:center;
+  box-shadow:0 0 0 2px #121315,8px 8px 0 0 #121315;animation:introPose .55s cubic-bezier(.2,.8,.2,1) both}
+#intro .in-logo svg{width:70px;height:70px;overflow:visible}
+#intro .in-m{stroke-dasharray:60;stroke-dashoffset:60;animation:introTrace .7s .25s cubic-bezier(.6,0,.3,1) forwards}
+#intro .in-nom{margin:0;font:700 12px/1 'JetBrains Mono',ui-monospace,Menlo,monospace;letter-spacing:.32em;text-transform:uppercase;color:#121315;padding-left:.32em;animation:introFondu .5s .35s both}
+#intro .in-barre{width:150px;height:3px;border-radius:3px;background:rgba(18,19,21,.12);overflow:hidden;animation:introFondu .5s .45s both}
+#intro .in-barre i{display:block;width:40%;height:100%;border-radius:3px;background:#E2503A;animation:introBarre 1.1s .5s cubic-bezier(.5,0,.5,1) infinite}
+#intro.out{transform:translateY(-100%)}
+#intro.out .in-box{transform:translateY(40vh);opacity:0}
+html.intro-on .hero-text>*,html.intro-on .hero .profile,html.intro-on .hero .carousel{opacity:0;translate:0 18px}
+html.intro-go .hero-text>*,html.intro-go .hero .profile,html.intro-go .hero .carousel{opacity:1;translate:0 0;transition:opacity .6s ease,translate .7s cubic-bezier(.2,.8,.2,1)}
+html.intro-go .hero .carousel{transition-delay:.12s}html.intro-go .hero-text>*:nth-child(1){transition-delay:.2s}
+html.intro-go .hero-text>*:nth-child(2){transition-delay:.28s}html.intro-go .hero .profile{transition-delay:.38s}
+@keyframes introPose{from{transform:translateY(14px) scale(.9);box-shadow:0 0 0 2px #121315,0 0 0 0 #121315}}
+@keyframes introTrace{to{stroke-dashoffset:0}}
+@keyframes introFondu{from{opacity:0;transform:translateY(6px)}}
+@keyframes introBarre{from{transform:translateX(-100%)}to{transform:translateX(250%)}}
+@keyframes introSecours{to{opacity:0;visibility:hidden}}
+@media (prefers-reduced-motion:reduce){#intro,#intro *{animation:none!important}#intro .in-m{stroke-dashoffset:0}#intro.out{transform:none;opacity:0}
+  html.intro-on .hero-text>*,html.intro-on .hero .profile,html.intro-on .hero .carousel{translate:none}}
+</style>
+<div id="intro" aria-hidden="true"><div class="in-box">
+  <div class="in-logo"><svg viewBox="0 0 64 64"><path d="M4 18Q4 7 14 7H25Q28.5 7 30.5 9.8L34 14.5H50Q60 14.5 60 24.5V48Q60 58 50 58H14Q4 58 4 48Z" fill="#34465F"/><path class="in-m" d="M19.5 47V29.5L32 41.5L44.5 29.5V47" fill="none" stroke="#E2503A" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+  <p class="in-nom">COLOTTE Maxime</p>
+  <div class="in-barre"><i></i></div>
+</div></div>
+<script id="intro-js">
+(function(){var h=document.documentElement,el=document.getElementById('intro');h.classList.add('intro-on');
+  var fini=false;function sortir(){if(fini)return;fini=true;
+    requestAnimationFrame(function(){el.classList.add('out');h.classList.add('intro-go');
+      setTimeout(function(){el.remove();h.classList.remove('intro-on','intro-go')},1300)})}
+  if(document.readyState!=='loading')sortir();else document.addEventListener('DOMContentLoaded',sortir);
+  setTimeout(sortir,8000)})();
+</script>
 <!-- Arrivée toujours en mode jour : le mode nuit ne s'active qu'avec le bouton du menu -->
 <style>
 /* ===== Tokens ===== */
