@@ -706,12 +706,12 @@ p,.lead,dd{text-align:justify;text-align-last:left;hyphens:auto;-webkit-hyphens:
         </div></div>
         <div class="car-ui"><div class="dots" id="dots"></div></div>
       </div>
-      <a class="down" href="#portfolio" aria-label="Descendre vers les projets phares">
+      <a class="down" href="#apercu" aria-label="Descendre vers les projets phares">
         <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#050A0B" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v16M5 13l7 7 7-7"/></svg>
       </a>
     </header>
 
-    <div class="apercu" id="apercu" data-off hidden>
+    <div class="apercu" id="apercu">
       <div class="wrap">
         <div class="classeur" id="classeur">
           <div class="cl-tilt">
@@ -1909,7 +1909,7 @@ window.addEventListener('wheel',shut,{passive:true});window.addEventListener('to
 </script>
 <script id="classeur-js">
 (function(){
-  var root=document.getElementById('classeur');if(!root||root.closest('[data-off]'))return;
+  var root=document.getElementById('classeur');if(!root)return;
   var files=[].slice.call(root.querySelectorAll('.fd')),cnt=document.getElementById('clCount'),busy=false;
   function sync(){if(!cnt)return;var i=0;files.forEach(function(f,k){if(f.dataset.d==='0')i=k});cnt.textContent='0'+(i+1)+' / 03'}
   files.forEach(function(f){f.addEventListener('click',function(e){
@@ -3178,7 +3178,6 @@ video{cursor:pointer!important}
 #apropos .about-main>.folder.cv-card .cv-thumb{align-self:center;height:auto!important}
 </style>
 <style id="pile-css">
-#apercu[data-off]{display:none!important}
 /* Accueil : pile de projets (photo + titre) qui défile au rythme du scroll */
 #classeur.pile .cl-tilt,#classeur.pile .cl-base,#classeur.pile .cl-count{display:none!important}
 #classeur.pile{padding:0;perspective:none}
@@ -3209,7 +3208,7 @@ video{cursor:pointer!important}
 </style>
 <script id="pile-js">
 (function(){
-  var root=document.getElementById('classeur');if(!root||root.closest('[data-off]'))return;
+  var root=document.getElementById('classeur');if(!root)return;
   var entries=[].slice.call(document.querySelectorAll('#projets .entry')).filter(function(e){return !e.classList.contains('entry-suite')});
   var items=entries.map(function(e){var cap=e.querySelector('.cap'),shot=e.querySelector('.shot');if(!cap||!shot)return null;
     var im=shot.querySelector('.mslide img,.img img'),v=shot.querySelector('video'),src=im?im.getAttribute('src'):(v&&v.getAttribute('poster'));if(!src)return null;
