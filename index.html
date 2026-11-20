@@ -3693,10 +3693,10 @@ new MutationObserver(chk).observe(pv,{subtree:true,childList:true,characterData:
 #projets .entry.stack3d .cap .cap3d,#projets .entry.stack3d.v3d .cap p:not(.cap3d){display:none}
 #projets .entry.stack3d.v3d .cap .cap3d{display:block}
 /* en mode 3D, rien ne bouge au survol (on fait tourner la table) */
-#projets .entry.stack3d .shot3d{translate:none}
-#projets .entry.stack3d:hover .shot:not(:hover){translate:none!important;--o:6px}   /* seul le dossier survolé se soulève */
-/* survol d'un onglet (devant ou derrière) : le dossier se soulève, comme « Travail du bois » */
-#projets .entry.stack3d .shot3d:hover,#projets .entry.stack3d.v3d .shot.tphoto:hover{translate:-6px -6px!important;--o:9px}
+#projets .entry.stack3d .shot3d{translate:none;transition:transform .12s linear,translate .3s cubic-bezier(.2,.8,.2,1),box-shadow .3s}
+#projets .entry.stack3d:hover .shot{translate:none!important}
+/* survol de l'un des deux dossiers (photos ou 3D) : les deux se soulèvent ensemble, comme un seul classeur */
+#projets .entry.stack3d:has(.shot:hover) .shot{translate:-6px -6px!important;--o:9px}
 </style>
 <script id="onglet-3d-js">
 (function(){
@@ -3709,6 +3709,8 @@ new MutationObserver(chk).observe(pv,{subtree:true,childList:true,characterData:
   if(document.fonts&&document.fonts.ready)document.fonts.ready.then(sync);
   if('ResizeObserver' in window)new ResizeObserver(sync).observe(ph);
   new MutationObserver(sync).observe(ph,{attributes:true,attributeFilter:['style']});
+  /* l'inclinaison du dossier photo au survol est recopiée sur le dossier 3D : ils bougent ensemble */
+  new MutationObserver(function(){s3.style.transform=ph.style.transform}).observe(ph,{attributes:true,attributeFilter:['style']});
   function front(on){en.classList.toggle('v3d',on);s3.setAttribute('aria-hidden',String(!on));ph.setAttribute('aria-hidden',String(on));
     tb3.setAttribute('aria-pressed',String(on));try{dispatchEvent(new Event('resize'))}catch(_){}}
   /* clic sur le dossier rangé derrière (seul son onglet dépasse) : il passe devant */
@@ -3729,15 +3731,18 @@ new MutationObserver(chk).observe(pv,{subtree:true,childList:true,characterData:
 /* la flèche orange passe dans l'onglet (coin supérieur gauche), en plus gros et toujours visible */
 #projets .entry .cap h3::after{display:none!important}
 /* la flèche orange est dans le coin supérieur gauche des photos du projet (là où l'on clique pour l'ouvrir) */
-#projets .entry .shot>.go-arrow{position:absolute;left:24px;top:16px;z-index:6;pointer-events:none;font:700 2.2rem/1 var(--display,system-ui);color:var(--signal,#E5533D);
-  text-shadow:0 0 2px rgba(0,0,0,.55),0 1px 8px rgba(0,0,0,.35)}
+#projets .entry .shot>.go-arrow{position:absolute;left:26px;top:26px;z-index:6;pointer-events:none;display:grid;place-items:center;
+  width:58px;height:58px;border-radius:14px;background:var(--bone,#F3F1EA);color:var(--signal,#E5533D);
+  box-shadow:0 0 0 2px var(--edge,#121315),5px 5px 0 2px var(--hard,#121315)}   /* même cadre que les boutons du site : trait d'encre + ombre franche */
+#projets .entry .shot>.go-arrow svg{width:34px;height:34px;fill:none;stroke:currentColor;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+@media (max-width:620px){#projets .entry .shot>.go-arrow{width:46px;height:46px;left:20px;top:20px;border-radius:12px}#projets .entry .shot>.go-arrow svg{width:27px;height:27px}}
 #projets .entry:hover .shot>.go-arrow{animation:capNudge 1.1s ease-in-out .2s infinite}
 @media (prefers-reduced-motion:reduce){#projets .entry:hover .shot>.go-arrow{animation:none}}
 #pov .go-arrow{display:none}
 </style>
 <script id="go-arrow-js">
 document.querySelectorAll('#projets .entry .shot').forEach(function(s){if(s.querySelector('.stage,.vbox'))return;
-  var a=document.createElement('span');a.className='go-arrow';a.setAttribute('aria-hidden','true');a.textContent='\u2192';s.appendChild(a)});
+  var a=document.createElement('span');a.className='go-arrow';a.setAttribute('aria-hidden','true');a.innerHTML='<svg viewBox="0 0 24 24"><path d="M4 12h15"/><path d="m13 5 7 7-7 7"/></svg>';s.appendChild(a)});
 </script>
 </body>
 </html>
