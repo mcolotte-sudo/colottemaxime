@@ -3727,10 +3727,17 @@ new MutationObserver(chk).observe(pv,{subtree:true,childList:true,characterData:
 #projets .entry .cap,#projets .entry .cap *{cursor:default!important}
 #projets .entry .cap,#projets .entry:hover .cap,#projets .entry .cap:hover{translate:none!important;filter:none!important;--sh:var(--sh0,8px 8px 0 var(--hard))}
 /* la flèche orange passe dans l'onglet (coin supérieur gauche), en plus gros et toujours visible */
-#projets .entry .cap h3::after,#projets .entry:hover .cap h3::after,#projets .entry .cap:hover h3::after{content:"\2192"!important;display:block!important;position:absolute;left:22px;top:-31px;margin:0;
-  font-size:1.9rem;line-height:1;font-weight:700;color:var(--signal,#E5533D);opacity:1!important;transform:none;pointer-events:none;z-index:2}
-#projets .entry:hover .cap h3::after{animation:capNudge 1.1s ease-in-out .2s infinite}
-@media (prefers-reduced-motion:reduce){#projets .entry:hover .cap h3::after{animation:none}}
+#projets .entry .cap h3::after{display:none!important}
+/* la flèche orange est dans le coin supérieur gauche des photos du projet (là où l'on clique pour l'ouvrir) */
+#projets .entry .shot>.go-arrow{position:absolute;left:24px;top:16px;z-index:6;pointer-events:none;font:700 2.2rem/1 var(--display,system-ui);color:var(--signal,#E5533D);
+  text-shadow:0 0 2px rgba(0,0,0,.55),0 1px 8px rgba(0,0,0,.35)}
+#projets .entry:hover .shot>.go-arrow{animation:capNudge 1.1s ease-in-out .2s infinite}
+@media (prefers-reduced-motion:reduce){#projets .entry:hover .shot>.go-arrow{animation:none}}
+#pov .go-arrow{display:none}
 </style>
+<script id="go-arrow-js">
+document.querySelectorAll('#projets .entry .shot').forEach(function(s){if(s.querySelector('.stage,.vbox'))return;
+  var a=document.createElement('span');a.className='go-arrow';a.setAttribute('aria-hidden','true');a.textContent='\u2192';s.appendChild(a)});
+</script>
 </body>
 </html>
