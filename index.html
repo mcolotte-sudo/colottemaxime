@@ -2669,10 +2669,15 @@ section{scroll-margin-top:84px}
     var prints=media.map(function(m,k){var p=mk('figure','sh-print'+(m.live?' live':''));
       if(m.live){p.appendChild(m.node)}else{var im=mk('img');im.src=m.img.currentSrc||m.img.src;im.alt=m.img.alt||'';im.decoding='async';p.appendChild(im);
         if(m.img.naturalWidth)p.style.setProperty('--r',(m.img.naturalWidth/m.img.naturalHeight).toFixed(3))}
-      if(m.sl&&m.sl.getAttribute('data-caption')){var fc=mk('figcaption','sh-cap');fc.textContent=T(m.sl.getAttribute('data-caption'));p.appendChild(fc)}   /* légende écrite en bas du tirage */
       var clip=mk('i','sh-clip');clip.innerHTML='<svg viewBox="0 0 30 70" aria-hidden="true"><path d="M10 62V14a6 6 0 0 1 12 0v40a10 10 0 0 1-20 0V10A8.5 8.5 0 0 1 19 10v44" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>';p.appendChild(clip);
       desk.appendChild(p);return p});
     var note=mk('div','sh-note'),noteT=mk('p');note.appendChild(noteT);desk.appendChild(note);
+    /* légende sous la pile de tirages (ex. « En partenariat en cours avec Somfy ») */
+    var shCap=mk('p','sh-cap');desk.appendChild(shCap);
+    function placeCap(){var m=media[cur.i],c=m&&m.sl&&m.sl.getAttribute('data-caption');shCap.textContent=c?T(c):'';shCap.style.display=c?'':'none';if(!c)return;
+      var d=desk.getBoundingClientRect(),b=0,l=1e9,r=-1e9;prints.forEach(function(p){var q=p.getBoundingClientRect();if(q.width){b=Math.max(b,q.bottom);l=Math.min(l,q.left);r=Math.max(r,q.right)}});
+      var f=desk.querySelector('.sh-print.p0'),fq=f&&f.getBoundingClientRect();shCap.style.top=(b-d.top+14)+'px';shCap.style.left=((fq&&fq.width?fq.left+fq.width/2:(l+r)/2)-d.left)+'px'}
+    [60,450,900].forEach(function(t){setTimeout(placeCap,t)});window.addEventListener('resize',placeCap);
     var pen=mk('i','sh-pen');pen.innerHTML='<svg viewBox="0 0 24 240" aria-hidden="true"><rect x="3" y="28" width="18" height="190" rx="3" fill="#1d1f22"/><rect x="3" y="196" width="18" height="10" fill="#3a3f48"/><path d="M3 28 12 0 21 28z" fill="#E9D3B0"/><path d="M9 9 12 0 15 9z" fill="#121315"/><rect x="3" y="206" width="18" height="16" rx="4" fill="#E2503A"/></svg>';desk.appendChild(pen);
     var gum=mk('i','sh-gum');gum.innerHTML='<svg viewBox="0 0 90 44" aria-hidden="true"><rect x="2" y="4" width="86" height="36" rx="7" fill="#EFEDE6"/><rect x="34" y="4" width="54" height="36" rx="7" fill="#E2503A"/><rect x="34" y="4" width="14" height="36" fill="#E2503A"/><rect x="34" y="4" width="54" height="7" rx="3" fill="#c9412e"/><path d="M44 30h32" stroke="#121315" stroke-width="3" stroke-linecap="round"/><path d="M8 34c6-2 14-2 20 0" stroke="#d6d3c9" stroke-width="3" stroke-linecap="round" fill="none"/></svg>';desk.appendChild(gum);
     var tlayer=mk('div','sh-tl');desk.appendChild(tlayer);var tKey=null;
@@ -2694,7 +2699,7 @@ section{scroll-margin-top:84px}
       var b=badge?badge.textContent.replace(/^[\s■▪•·]+/,'').trim():'';
       meta.textContent=('0'+(idx+1)).slice(-2)+' · '+(b||'')+' · '+(shot.getAttribute('data-tab')||'');
       rCat[0].textContent=T('Catégorie');rCat[1].textContent=b;
-      drawTools();
+      drawTools();if(typeof placeCap==='function')setTimeout(placeCap,0);
       rMed[0].textContent=T('Médias');rMed[1].textContent=vbox?T('Vidéo'):stage?T('Modèle 3D interactif'):media.length+' '+T('photos');
       rPh[0].textContent=T('Cette photo');
       var m=media[cur.i],x=m&&m.sl;var long=x?(x.getAttribute('data-proj')||''):'';if(long.trim()==='x')long='';
@@ -3746,9 +3751,8 @@ document.querySelectorAll('#projets .entry .shot').forEach(function(s){if(s.quer
   var a=document.createElement('span');a.className='go-arrow';a.setAttribute('aria-hidden','true');a.textContent='\u2192';s.appendChild(a)});
 </script>
 <style id="legende-tirage-css">
-/* légende dans la marge blanche en bas du tirage photo (fiche projet) */
-#pov .sh-print .sh-cap{position:absolute;left:0;right:0;bottom:0;height:40px;display:grid;place-items:center;margin:0;padding:0 12px;
-  font:700 clamp(.72rem,1.1vw,.95rem)/1.1 var(--mono,ui-monospace,monospace);letter-spacing:.08em;text-transform:uppercase;color:#121315;text-align:center;pointer-events:none}
+#pov .sh-desk>.sh-cap{position:absolute;z-index:5;margin:0;width:auto!important;right:auto!important;transform:translateX(-50%);white-space:nowrap;text-align:center;pointer-events:none;
+  font:700 clamp(.72rem,1.1vw,.95rem)/1.1 var(--mono,ui-monospace,monospace);letter-spacing:.08em;text-transform:uppercase;color:#121315}
 </style>
 </body>
 </html>
