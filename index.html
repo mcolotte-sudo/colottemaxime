@@ -2724,7 +2724,7 @@ section{scroll-margin-top:84px}
       rPh[2].classList.remove('flash');void rPh[2].offsetWidth;rPh[2].classList.add('flash')}
     cur.go=go;nav.hidden=media.length<2;
     bp.addEventListener('click',function(e){e.stopPropagation();go(-1)});bn.addEventListener('click',function(e){e.stopPropagation();go(1)});
-    desk.addEventListener('click',function(e){if(e.target.closest('video,.c3d,.live,button'))return;e.stopPropagation();go(1)});
+    desk.addEventListener('click',function(e){if(e.target.closest('video,.c3d,.live,button,.sh-tool2,.sh-pen,.sh-gum'))return;   /* un clic sur un outil (icône) ne tourne pas la page */e.stopPropagation();go(1)});
     var sx=null;desk.addEventListener('pointerdown',function(e){if(e.target.closest('.live'))return;sx=e.clientX});
     desk.addEventListener('pointerup',function(e){if(sx==null)return;var d=e.clientX-sx;sx=null;if(Math.abs(d)>40){e.stopPropagation();go(d<0?1:-1);desk._sw=1;setTimeout(function(){desk._sw=0},50)}});
     var o3=new MutationObserver(function(){txt();name()});o3.observe(en,{attributes:true,subtree:true,characterData:true,childList:true,attributeFilter:['data-proj','data-desc','data-tab']});cur.obs.push(o3);
