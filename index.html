@@ -25,7 +25,9 @@
   box-shadow:0 0 0 2px #121315,8px 8px 0 0 #121315;animation:introPose .55s cubic-bezier(.2,.8,.2,1) both}
 #intro .in-logo svg{width:70px;height:70px;overflow:visible}
 #intro .in-m{stroke-dasharray:60;stroke-dashoffset:60;animation:introTrace .7s .25s cubic-bezier(.6,0,.3,1) forwards}
-#intro .in-nom{margin:0;font:700 12px/1 'JetBrains Mono',ui-monospace,Menlo,monospace;letter-spacing:.32em;text-transform:uppercase;color:#121315;padding-left:.32em;animation:introFondu .5s .35s both}
+#intro .in-nom{margin:0;font:700 clamp(1.9rem,5vw,3.2rem)/1 'Unbounded','Arial Black',system-ui,sans-serif;letter-spacing:-.03em;color:#121315;text-align:center;white-space:nowrap;animation:introNom .6s .3s cubic-bezier(.2,.8,.2,1) both}
+#intro .in-nom b{font-weight:inherit;color:#E2503A}
+@keyframes introNom{from{opacity:0;transform:translateY(16px);clip-path:inset(0 0 100% 0)}to{clip-path:inset(0 0 -20% 0)}}
 #intro .in-barre{width:150px;height:3px;border-radius:3px;background:rgba(18,19,21,.12);overflow:hidden;animation:introFondu .5s .45s both}
 #intro .in-barre i{display:block;width:40%;height:100%;border-radius:3px;background:#E2503A;animation:introBarre 1.1s .5s cubic-bezier(.5,0,.5,1) infinite}
 #intro.out{transform:translateY(-100%)}
@@ -44,7 +46,7 @@ html.intro-go .hero-text>*:nth-child(2){transition-delay:.28s}html.intro-go .her
 </style>
 <div id="intro" aria-hidden="true"><div class="in-box">
   <div class="in-logo"><svg viewBox="0 0 64 64"><path d="M4 18Q4 7 14 7H25Q28.5 7 30.5 9.8L34 14.5H50Q60 14.5 60 24.5V48Q60 58 50 58H14Q4 58 4 48Z" fill="#34465F"/><path class="in-m" d="M19.5 47V29.5L32 41.5L44.5 29.5V47" fill="none" stroke="#E2503A" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-  <p class="in-nom">COLOTTE Maxime</p>
+  <p class="in-nom">COLOTTE <b>Maxime</b></p>
   <div class="in-barre"><i></i></div>
 </div></div>
 <script id="intro-js">
